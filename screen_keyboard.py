@@ -17,7 +17,7 @@ def press():
 
 class Buttons:
     def __init__(self, master, text, width=5, height=2, activebackground="white", activeforeground="black", bg='black',
-                 fg="palegreen", font="None 13"):
+                 fg="palegreen", font="None 13", command=NONE):
         self.root = master
         self.text = text
         self.width = width
@@ -27,10 +27,10 @@ class Buttons:
         self.bg = bg
         self.fg = fg
         self.font = font
-
+        self.command = command
         self.but = Button(self.root, text=self.text, width=self.width, height=self.height, bg=self.bg, fg=self.fg,
                           font=self.font, activebackground=self.activebackground,
-                          activeforeground=self.activeforeground)
+                          activeforeground=self.activeforeground, command=self.command)
 
     def place(self, x, y):
         self.but.place(x=x, y=y)
@@ -41,28 +41,30 @@ class Buttons:
 
 # When shift is pressed
 def shift_press():
-    twiddle.config(text="~")
-    one.config(text="!")
-    two.config(text="@")
-    three.config(text="#")
-    four.config(text="$")
-    five.config(text="%")
-    six.config(text="^")
-    seven.config(text="&")
-    eight.config(text="*")
-    nine.config(text="(")
-    zero.config(text=")")
-    minus.config(text="_")
-    equal_to.config(text="+")
-    sqr_bracket_left.config(text="{")
-    sqr_bracket_right.config(text="}")
-    backslash.config(text="|")
-    semi_colon.config(text=":")
-    single_quote.config(text='"')
-    comma.config(text="<")
-    full_stop.config(text=">")
-    division.config(text="?")
-    capitalize()
+        twiddle.config(text="~")
+        one.config(text="!")
+        two.config(text="@")
+        three.config(text="#")
+        four.config(text="$")
+        five.config(text="%")
+        six.config(text="^")
+        seven.config(text="&")
+        eight.config(text="*")
+        nine.config(text="(")
+        zero.config(text=")")
+        minus.config(text="_")
+        equal_to.config(text="+")
+        sqr_bracket_left.config(text="{")
+        sqr_bracket_right.config(text="}")
+        backslash.config(text="|")
+        semi_colon.config(text=":")
+        single_quote.config(text='"')
+        comma.config(text="<")
+        full_stop.config(text=">")
+        division.config(text="?")
+        capitalize()
+
+
 
 
 # When Caps_lock or shift is pressed
@@ -144,6 +146,7 @@ zero = Buttons(root, text="0")
 minus = Buttons(root, text="-")
 equal_to = Buttons(root, text="=")
 backspace = Buttons(root, text="Backspace", width=14, height=2)
+
 twiddle.place(x=0, y=60)
 one.place(x=100, y=60)
 two.place(x=180, y=60)
@@ -161,16 +164,16 @@ backspace.place(x=1060, y=60)
 
 # TODO -> Row-3
 tab = Buttons(root, text="Tab", width=9, height=2, )
-q = Buttons(root, text="Q", )
-w = Buttons(root, text="W")
-e = Buttons(root, text="E")
-r = Buttons(root, text="R")
-t = Buttons(root, text="T")
-y = Buttons(root, text="Y")
-u = Buttons(root, text="U")
-i = Buttons(root, text="I")
-o = Buttons(root, text="O")
-p = Buttons(root, text="P")
+q = Buttons(root, text="q", )
+w = Buttons(root, text="w")
+e = Buttons(root, text="e")
+r = Buttons(root, text="r")
+t = Buttons(root, text="t")
+y = Buttons(root, text="y")
+u = Buttons(root, text="u")
+i = Buttons(root, text="i")
+o = Buttons(root, text="o")
+p = Buttons(root, text="p")
 sqr_bracket_left = Buttons(root, text="[")
 sqr_bracket_right = Buttons(root, text="]")
 backslash = Buttons(root, text="\\")
@@ -192,15 +195,15 @@ backslash.place(x=1100, y=140)
 
 # TODO -> Row-4
 caps_lock = Buttons(root, text="Caps Lock", width=10, height=2)
-a = Buttons(root, text="A")
-s = Buttons(root, text="S")
-d = Buttons(root, text="D")
-f = Buttons(root, text="F")
-g = Buttons(root, text="G", width=5, height=2)
-h = Buttons(root, text="H")
-j = Buttons(root, text="J")
-k = Buttons(root, text="K")
-l = Buttons(root, text="L")
+a = Buttons(root, text="a")
+s = Buttons(root, text="s")
+d = Buttons(root, text="d")
+f = Buttons(root, text="f")
+g = Buttons(root, text="g", width=5, height=2)
+h = Buttons(root, text="h")
+j = Buttons(root, text="j")
+k = Buttons(root, text="k")
+l = Buttons(root, text="l")
 semi_colon = Buttons(root, text=";")
 single_quote = Buttons(root, text="'")
 enter = Buttons(root, text="Enter", width=12, height=2, )
@@ -219,14 +222,14 @@ single_quote.place(x=950, y=220)
 enter.place(x=1030, y=220)
 
 # TODO -> Row-5
-lshift = Buttons(root, text="Shift", width=13, height=2)
-z = Buttons(root, text="Z", )
-x = Buttons(root, text="X")
-c = Buttons(root, text="C")
-v = Buttons(root, text="V")
-b = Buttons(root, text="B")
-n = Buttons(root, text="N")
-m = Buttons(root, text="M")
+lshift = Buttons(root, text="Shift", width=13, height=2, command=shift_press)
+z = Buttons(root, text="z", )
+x = Buttons(root, text="x")
+c = Buttons(root, text="c")
+v = Buttons(root, text="v")
+b = Buttons(root, text="b")
+n = Buttons(root, text="n")
+m = Buttons(root, text="m")
 full_stop = Buttons(root, text=".", width=5, height=2, font="None 13 bold")
 comma = Buttons(root, text=",", height=2, font="None 13 bold")
 division = Buttons(root, text="/")
