@@ -7,7 +7,7 @@ if __name__ == "__main__":
 
     root = Tk()
     root.geometry("1225x470")
-    # root.iconbitmap('icon.ico')
+    root.iconbitmap('icon.ico')
     root.title("On-Screen Keyboard")
     root.config(bg="grey10")
     root.focus_force()
