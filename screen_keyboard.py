@@ -31,7 +31,7 @@ def writeMode_On():
 def writeMode_Off():
     scrollbar.destroy()
     text_area.destroy()
-    root.geometry('1008x450')
+    root.geometry('1065x450')
 
 
 def pressed(event):
