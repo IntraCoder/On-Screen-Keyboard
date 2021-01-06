@@ -1,48 +1,164 @@
 from tkinter import *
-import pyautogui
 import os
+import pyautogui
+from tkinter import ttk
 
 if __name__ == "__main__":
+
     root = Tk()
-    root.geometry("1230x470")
-    root.config(bg="black")
+    root.geometry("1225x470")
+    # root.iconbitmap('icon.ico')
     root.title("On-Screen Keyboard")
+    root.config(bg="grey10")
+    root.focus_force()
+    root.attributes("-topmost", True)
+    style = ttk.Style()
     root.resizable(0, 0)
-    # root.wm_iconphoto("keyboard.ico")
+
+
+    keylist = []
+    spacial_keys = ["win", "alt", "ctrl", "Fn"]
+    win_OFF = True
     shiftOFF = True
+    ctrlOFF = True
+    altOFF = True
 
 
     def pressed(event):
-        global shiftOFF
+        global shiftOFF, altOFF, ctrlOFF, win_OFF
         Button_name = event.widget
-        # print(Button_name)
         try:
             Button_text = Button_name.cget('text')
-            # Button_text=Button_text.lower()
-            print(Button_text)
+            Button_text = Button_text.lower()
+
         except Exception as e:
             pass
-
         try:
-            if Button_text == "Shift":
+            if Button_text == "shift":
                 if shiftOFF:
+                    lshift.config(text="Shift", bg="white", fg="grey10")
+                    rshift.config(text="Shift", bg="white", fg="grey10")
                     shiftOFF = False
                     shift_press_ON()
+
+                elif not shiftOFF:
+                    keylist.clear()
+                    shiftOFF = True
+                    shift_press_OFF()
+
+            elif Button_text == "caps lock":
+                if shiftOFF:
+                    caps_lock.config(text="Caps Lock", bg="white", fg="grey10")
+                    shiftOFF = False
+                    shift_press_ON()
+
                 elif not shiftOFF:
                     shiftOFF = True
                     shift_press_OFF()
 
-            elif Button_text == "Caps Lock":
-                if shiftOFF:
-                    shiftOFF = False
-                    shift_press_ON()
-                elif not shiftOFF:
-                    shiftOFF = True
-                    shift_press_OFF()
-            if Button_text == uppercaes:
-                pyautogui.hotkey("shift", Button_text)
+            elif Button_text == "win":
+                if win_OFF:
+                    win_key.config(text="Win", bg="white", fg="grey10")
+                    win_OFF = False
 
-            pyautogui.press(Button_text)
+                elif not win_OFF:
+                    win_OFF = True
+
+            elif Button_text == "alt":
+                if altOFF:
+                    l_alt.config(text="Alt", bg="white", fg="grey10")
+                    r_alt.config(text="Alt", bg="white", fg="grey10")
+                    altOFF = False
+                elif not altOFF:
+                    altOFF = True
+
+            elif Button_text == "ctrl":
+                if ctrlOFF:
+                    rctrl.config(text="Ctrl", bg="white", fg="grey10")
+                    lctrl.config(text="Ctrl", bg="white", fg="grey10")
+                    ctrlOFF = False
+                elif not ctrlOFF:
+                    ctrlOFF = True
+            elif Button_text == "\u1438":
+                pyautogui.press("left")
+
+            elif Button_text == "\u1433":
+                pyautogui.press("right")
+
+            elif Button_text == "\u1431":
+                pyautogui.press("up")
+
+            elif Button_text == "ptrscr":
+                pyautogui.press("printscreen")
+
+            elif Button_text == "\u142f":
+                pyautogui.press("down")
+            else:
+                if not shiftOFF:
+                    keylist.clear()
+                    keylist.append('shift')
+                    keylist.append(Button_text)
+                    try:
+                        print(keylist)
+                        Next_key = keylist[1]
+                        pyautogui.hotkey('shift', Next_key)
+                        keylist.clear()
+                        shiftOFF = True
+                        lshift.config(text="Shift", fg='palegreen', bg='grey10')
+                        rshift.config(text="Shift", fg='palegreen', bg='grey10')
+                        shift_press_OFF()
+                    except Exception as e:
+                        pass
+
+                elif not altOFF:
+                    keylist.clear()
+                    keylist.append('atl')
+                    keylist.append(Button_text)
+                    try:
+                        print(keylist)
+                        Next_key = keylist[1]
+                        pyautogui.hotkey('atl', Next_key)
+                        keylist.clear()
+                        l_alt.config(text="Alt", fg='palegreen', bg='grey10')
+                        r_alt.config(text="Alt", fg='palegreen', bg='grey10')
+                        altOFF = True
+                    except Exception as e:
+                        pass
+
+
+                elif not win_OFF:
+                    keylist.clear()
+                    keylist.append('win')
+                    keylist.append(Button_text)
+                    try:
+                        print(keylist)
+                        Next_key = keylist[1]
+                        pyautogui.hotkey('win', Next_key)
+                        keylist.clear()
+                        win_key.config(text="Win", fg='palegreen', bg='grey10')
+                        win_OFF = True
+                    except Exception as e:
+                        pass
+
+                elif not ctrlOFF:
+                    keylist.clear()
+                    keylist.append('ctrl')
+                    keylist.append(Button_text)
+                    try:
+                        print(keylist)
+                        Next_key = keylist[1]
+                        pyautogui.hotkey('ctrl', Next_key)
+                        keylist.clear()
+                        lctrl.config(text="Ctrl", fg='palegreen', bg='grey10')
+                        rctrl.config(text="Ctrl", fg='palegreen', bg='grey10')
+                        ctrlOFF = True
+                    except Exception as e:
+                        pass
+                else:
+                    pyautogui.press(Button_text)
+                    print(Button_text)
+                caps_lock.config(text="Caps Lock", bg="grey10", fg="palegreen")
+
 
         except Exception as e:
             pass
@@ -81,7 +197,7 @@ if __name__ == "__main__":
             self.bind('<Button-1>', pressed)
 
         def enter_col(self, event):
-            self.but.config(bg="floral white", fg="black")
+            self.but.config(bg="floral white", fg="grey10")
 
         def leave_col(self, event):
             self.but.config(bg="grey10", fg="palegreen")
@@ -303,6 +419,8 @@ if __name__ == "__main__":
     semi_colon = Buttons(root, text=";")
     single_quote = Buttons(root, text="'")
     enter = Buttons(root, text="Enter", width=14, height=2, )
+    write = Buttons(root, text="Write\n\nMode", height=7)
+
     caps_lock.place(x=0, y=220)
     a.place(x=150, y=220)
     s.place(x=230, y=220)
@@ -316,6 +434,7 @@ if __name__ == "__main__":
     semi_colon.place(x=870, y=220)
     single_quote.place(x=950, y=220)
     enter.place(x=1030, y=220)
+    write.place(x=1170, y=220)
 
     # TODO -> Row-5
     lshift = Buttons(root, text="Shift", width=13, height=2)
@@ -329,7 +448,7 @@ if __name__ == "__main__":
     full_stop = Buttons(root, text=".", width=5, height=2, font="None 13 bold")
     comma = Buttons(root, text=",", height=2, font="None 13 bold")
     division = Buttons(root, text="/")
-    rshift = Buttons(root, text="Shift", width=17, height=2, font="None 13", )
+    rshift = Buttons(root, text="Shift", width=18, height=2, font="None 13", )
     lshift.place(x=0, y=300)
     z.place(x=190, y=300)
     x.place(x=270, y=300)
@@ -348,7 +467,7 @@ if __name__ == "__main__":
     fn_key = Buttons(root, text="Fn", )
     win_key = Buttons(root, text="Win")
     l_alt = Buttons(root, text="Alt")
-    space = Buttons(root, text="Space", width=29, height=2)
+    space = Buttons(root, text="Space", width=40, height=2)
     r_alt = Buttons(root, text="Alt")
     rctrl = Buttons(root, text="Ctrl")
     left_arrow = Buttons(root, text="\u1438", height=1)
