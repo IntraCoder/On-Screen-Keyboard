@@ -1,5 +1,5 @@
 from tkinter import *
-# import pyautogui
+import pyautogui
 import os
 from tkinter import ttk
 
@@ -73,7 +73,7 @@ def pressed(event):
             if Caps_lockOFF:
                 caps_lock.config(text="Caps Lock", bg="floral white", fg="grey10")
                 Caps_lockOFF = False
-                shift_press_ON()
+                uppercaes()
 
             elif not Caps_lockOFF:
                 caps_lock.config(text="Caps Lock", fg='palegreen', bg='grey10')
