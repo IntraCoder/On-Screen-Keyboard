@@ -17,12 +17,13 @@ writeMode_off = True
 
 def writeMode_On():
     global text_area, scrollbar
-    root.geometry('1445x450')
+    root.geometry('1400x450')
+    root.maxsize()
     scrollbar = Scrollbar(root)
     scrollbar.pack(side=RIGHT, fill=Y)
 
-    text_area = Text(root, height=30, yscrollcommand=scrollbar.set, width=38, bg="grey10", fg="white", relief=SUNKEN,
-                     bd=5,
+    text_area = Text(root, height=30, yscrollcommand=scrollbar.set, width=35, bg="grey10", fg="white", relief=SUNKEN,
+                     bd=5, insertbackground="white",
                      font=('comic.ttf', 13))
     text_area.pack(side=RIGHT, fill=X)
     scrollbar.config(command=text_area.yview)
@@ -199,7 +200,8 @@ class Buttons:
 
         self.but = Button(self.root, text=self.text, width=self.width, height=self.height, bg=self.bg, fg=self.fg,
                           font=self.font, activebackground=self.activebackground,
-                          activeforeground=self.activeforeground)
+                          activeforeground=self.activeforeground,
+                          )
 
         self.but.bind("<Enter>", self.enter_col)
         self.but.bind("<Leave>", self.leave_col)
